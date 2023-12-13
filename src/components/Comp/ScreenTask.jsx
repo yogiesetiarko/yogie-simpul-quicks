@@ -75,6 +75,14 @@ const ScreenTask = () => {
   const [loading, setLoading] = React.useState(true);
   const [taskItems, setTaskItems] = React.useState(items);
 
+  React.useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timeoutId);
+  }, []);
+
   const removeLoading = () => {
     setLoading(false);
   };
@@ -97,8 +105,7 @@ const ScreenTask = () => {
     setTaskItems([...tempItems]);
   };
 
-  const handleChangeSelect = (value) => {
-    console.log(`selected ${value}`);
+  const handleChangeSelect = () => {
     setLoading(true);
   };
 

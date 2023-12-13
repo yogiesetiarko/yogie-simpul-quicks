@@ -1,32 +1,18 @@
 import React, { useEffect } from "react";
-// import { Navbar, Dropdown, ItemListDropdown, Image } from "react-web-skeleton";
 import { Outlet } from "react-router-dom";
-// import { ChildRoutes } from "../route";
-// import "./Layout.scss";
 import {
   IconSearch,
 } from "../../assets";
 import ScreenChat from "../Comp/ScreenChat";
 import ScreenTask from "../Comp/ScreenTask";
 
-// import DummyWords from "../CompPages/Translate/dummy-words.json";
-// import TextTranslate from "../CompPages/Translate/TextTranslate";
-
 export default function Layout () {
-  // const { pathname } = useLocation();
   const [openBlueNav, setOpenBlueNav] = React.useState(false);
   const [chatSelected, setChatSelected] = React.useState(false);
   const [taskSelected, setTaskSelected] = React.useState(false);
 
-  // const [openChat, setOpenChat] = React.useState(false);
-
-  // const isHomePage = useMemo(() => {
-  //   if (pathname === "/") return true;
-  //   else return false;
-  // }, [pathname]);
-
   useEffect(() => {
-    // localStorage.setItem("word_list", JSON.stringify(DummyWords));
+
   }, []);
 
   const clickBlueNav = () => {
@@ -37,9 +23,6 @@ export default function Layout () {
     if(taskSelected) {
       setTaskSelected(false);
     } 
-    // else {
-    //   setTaskSelected(true);
-    // }
     setChatSelected((prev) => !prev);
   };
 
@@ -47,9 +30,6 @@ export default function Layout () {
     if(chatSelected) {
       setChatSelected(false);
     } 
-    else {
-      // setChatSelected(false);
-    }
     setTaskSelected((prev) => !prev);
   };
 
