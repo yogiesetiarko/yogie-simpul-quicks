@@ -2,7 +2,7 @@
   "data": [
     {
       "id": "01",
-      "name": "me",
+      "name": "you",
       "message": "Halo Ini Aku..",
       "slug": "",
       "date": "", 
@@ -10,7 +10,7 @@
     },
     {
       "id": "10",
-      "name": "me",
+      "name": "you",
       "message": "Today June 09, 2021",
       "slug": "",
       "date": "", 
@@ -65,7 +65,7 @@
     },
     {
       "id": "08",
-      "name": "me",
+      "name": "you",
       "message": "Oke Dokeee...",
       "slug": "",
       "date": "", 

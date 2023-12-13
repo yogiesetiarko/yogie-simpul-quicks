@@ -42,6 +42,7 @@ const ThreeDotsComp = ({
   type,
   onReply,
   message,
+  name,
 }) => {
   let valueList;
   // let aaa = onReply();
@@ -72,7 +73,7 @@ const ThreeDotsComp = ({
                   <React.Fragment
                     key={item.value}
                   >
-                    <li className=" ant-dropdown-menu-item-only-child cursor-pointer" onClick={() => reply(message)}>
+                    <li className=" ant-dropdown-menu-item-only-child cursor-pointer" onClick={() => reply({message: message, name: name})}>
                       <span 
                         className="ant-dropdown-menu-title-content"
                         style={{

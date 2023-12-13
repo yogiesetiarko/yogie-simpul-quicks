@@ -10,6 +10,7 @@ const ChatItem = ({
 }) => {
 
   const doReply = (item) => {
+    // console.log("doReply, item", item);
     onClickReply(item);
   };
 
@@ -148,6 +149,7 @@ const ChatItem = ({
                   type="their"
                   onReply={doReply}
                   message={item.message}
+                  name={item.name}
                 />
               </div>
             </div>
@@ -190,6 +192,7 @@ const ChatItem = ({
                   type="their"
                   onReply={doReply}
                   message={item.message}
+                  name={item.name}
                 />
               </div>
             </div>
