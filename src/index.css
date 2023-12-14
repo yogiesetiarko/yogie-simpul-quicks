@@ -79,6 +79,12 @@ code {
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
 }
+
+.no-reply {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
 .reply-box-text {
   background-color: #F2F2F2;
   border-top: 1px solid black;
@@ -133,6 +139,12 @@ code {
   /* padding: 10px; */
   background: #EEDCFF;
   border-radius: 5px;  
+}
+.box-with-reply {
+  /* padding: 10px; */
+  background: #F2F2F2;
+  border-radius: 5px;  
+  border: 1px solid #E0E0E0;
 }
 
 .box-chat-theirs {
