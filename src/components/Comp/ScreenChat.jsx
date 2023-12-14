@@ -52,15 +52,30 @@ const ScreenChat = () => {
   };
 
   const clickSend = () => {
+
+    let withReply = {
+      reply: replyMessage,
+      message: chatMessage
+    };
+
     let tempMessage = addMessage;
-    tempMessage.push(chatMessage);
+    // tempMessage.push(chatMessage);
+    tempMessage.push(withReply);
     setAddMessage([...tempMessage]);
     setChatMessage("");
+
+    setReplyMessage("");
+    setReplyMessageName("");
   };
 
   const doReply = (item) => {
     setReplyMessage(item.message);
     setReplyMessageName(item.name);
+  };
+
+  const onCloseReply = () => {
+    setReplyMessage("");
+    setReplyMessageName("");
   };
 
   return(
@@ -172,16 +187,47 @@ const ScreenChat = () => {
                         {addMessage.map((item, index) => {
                           return (
                             <React.Fragment key={`${index}`}>
-                              <div className="my-baloon flex justify-end mt-[15px] mb-[15px]">
-                                <div>
-                                  <div
-                                    className="flex justify-end"
-                                    style={{
-                                      color: "#9B51E0",
-                                    }}
-                                  >
-                                    You
+                              {item.reply !== "" ? (<>
+                                <div className={"my-baloon flex justify-end mt-[15px] "+`${item.reply !== "" ? "" : "mb-[15px]"}`}>
+                                  <div>
+                                    {item.reply !== "" ? (<>
+                                      <div
+                                        className="flex justify-end"
+                                        style={{
+                                          color: "#9B51E0",
+                                        }}
+                                      >
+                                        You
+                                      </div>
+                                    </>) : null}
+                                    <div className="flex items-start">
+                                      <div className="box-with-reply">
+                                        <div
+                                          style={{
+                                            margin: "10px",
+                                            color: "#4F4F4F",
+                                            fontSize: "12px",
+                                          }}
+                                        >
+                                          {item.reply}
+                                        </div>
+                                      </div>
+                                    </div>
                                   </div>
+                                </div>
+                              </>) : null}
+                              <div className={"my-baloon flex justify-end mb-[15px] "+`${item.reply !== "" ? "mt-[7px]" : "mt-[15px]"}`}>
+                                <div>
+                                  {item.reply !== "" ? null : (<>
+                                    <div
+                                      className="flex justify-end"
+                                      style={{
+                                        color: "#9B51E0",
+                                      }}
+                                    >
+                                      You
+                                    </div>
+                                  </>)}
                                   <div className="flex items-start">
                                     <div className="three-dot cursor-pointer">
                                       <ThreeDotsComp 
@@ -196,7 +242,7 @@ const ScreenChat = () => {
                                           fontSize: "12px",
                                         }}
                                       >
-                                        {item}
+                                        {item.message}
                                       </div>
                                     </div>
                                   </div>
@@ -238,21 +284,21 @@ const ScreenChat = () => {
                   className="duration-300 col-span-5 text-left container-title-reply-header"
                 >
                   <div className='title-reply-header flex justify-between'>
-                    <div className='ml-[16px] mt-[16px]'>
-                      Replying to : {replyMessageName}
+                    <div className='ml-[16px] mt-[16px] font-bold'>
+                      Replying to {replyMessageName}
                     </div>
-                    <div className='mr-[8px] mt-[8px] cursor-pointer'>
-                      X
+                    <div className='mr-[8px] mt-[8px] cursor-pointer' onClick={() => onCloseReply()}>
+                      <CloseSign height="14" />
                     </div>
                   </div>
-                  <div className='ml-[16px] mt-[16px] mb-[12px]'>
+                  <div className='ml-[16px] mt-[7px] mb-[12px]'>
                     {replyMessage}
                   </div>
                 </div>
               </>) : null}
             </div>
             <div className="grid grid-cols-6 gap-4">
-              <div className="duration-300 cursor-pointer text-white chat-input-search col-span-5">
+              <div className={"duration-300 cursor-pointer text-white chat-input-search col-span-5 "+`${replyMessage !== "" ? "" : "no-reply"}`}>
                 <input
                   type="textarea"
                   placeholder="Type a new message"
