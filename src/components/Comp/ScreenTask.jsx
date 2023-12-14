@@ -18,7 +18,8 @@ const items = [
     description: "Closing off this case since this application has been cancelled. No one really understand how this case could possibly be cancelled. The options and the documents within this document were totally a guaranteed for a success!",
     status: 'not done',
     active: true,
-    new: false
+    new: false,
+    tags: ["Important ASAP", "Offline Meeting", "Virtual Meeting", "ASAP", "Client Related", "Self Task", "Appointments", "Court Related"]
   },
   {
     key: '2',
@@ -30,7 +31,8 @@ const items = [
     description: "All Cases must include all payment transactions, all documents and forms filled. All conversations in comments and messages in channels and emails should be provided as well in.",
     status: 'not done',
     active: false,
-    new: false
+    new: false,
+    tags: ["Self Task"]
   },
   {
     key: '3',
@@ -42,7 +44,8 @@ const items = [
     description: "",
     status: 'not done',
     active: false,
-    new: false
+    new: false,
+    tags: ["Virtual Meeting", "ASAP"]
   },
   {
     key: '4',
@@ -54,7 +57,8 @@ const items = [
     description: "",
     status: 'done',
     active: false,
-    new: false
+    new: false,
+    tags: ["Important ASAP", "Offline Meeting"]
   },
   {
     key: '5',
@@ -66,7 +70,8 @@ const items = [
     description: "",
     status: 'done',
     active: false,
-    new: false
+    new: false,
+    tags: ["Important ASAP", "Court Related"]
   },
 ];
 
@@ -98,7 +103,8 @@ const ScreenTask = () => {
       description: "",
       status: 'not done',
       active: true,
-      new: true
+      new: true,
+      tags: []
     };  
     let tempItems = taskItems;
     tempItems.push(newItems);

@@ -14,19 +14,109 @@ import {
   ArrowUpExpand,
   ArrowDownExpand,
   Clock,
-  Pencil
+  Pencil,
+  Bookmark
 } from "../../assets";
 import { 
   Checkbox,
   DatePicker,
-  Input
+  Input,
+  Dropdown,
+  Space
 } from 'antd';
 
+const items = [
+  {
+    label: <div className="pl-[14px] pr-[14px] pt-[9px] pb-[9px]" style={{backgroundColor: "#E5F1FF", borderRadius: "5px", fontSize: "12px"}}>Important ASAP</div>,
+    key: '0',
+    value: "Important ASAP",
+    slug: "important-asap"
+  },
+  {
+    label: <div className="pl-[14px] pr-[14px] pt-[9px] pb-[9px]" style={{backgroundColor: "#FDCFA4", borderRadius: "5px", fontSize: "12px"}}>Offline Meeting</div>,
+    key: '1',
+    value: "Offline Meeting",
+    slug: "offline-meeting"
+  },
+  {
+    label: <div className="pl-[14px] pr-[14px] pt-[9px] pb-[9px]" style={{backgroundColor: "#F9E9C3", borderRadius: "5px", fontSize: "12px"}}>Virtual Meeting</div>,
+    key: '2',
+    value: "Virtual Meeting",
+    slug: "virtual-meeting"    
+  },
+  {
+    label: <div className="pl-[14px] pr-[14px] pt-[9px] pb-[9px]" style={{backgroundColor: "#AFEBDB", borderRadius: "5px", fontSize: "12px"}}>ASAP</div>,
+    key: '3',
+    value: "ASAP",
+    slug: "asap"    
+  },
+  {
+    label: <div className="pl-[14px] pr-[14px] pt-[9px] pb-[9px]" style={{backgroundColor: "#CBF1C2", borderRadius: "5px", fontSize: "12px"}}>Client Related</div>,
+    key: '4',
+    value: "Client Related",
+    slug: "client-related"    
+  },
+  {
+    label: <div className="pl-[14px] pr-[14px] pt-[9px] pb-[9px]" style={{backgroundColor: "#CFCEF9", borderRadius: "5px", fontSize: "12px"}}>Self Task</div>,
+    key: '5',
+    value: "Self Task",
+    slug: "self-task"    
+  },
+  {
+    label: <div className="pl-[14px] pr-[14px] pt-[9px] pb-[9px]" style={{backgroundColor: "#F9E0FD", borderRadius: "5px", fontSize: "12px"}}>Appointments</div>,
+    key: '6',
+    value: "Appointments",
+    slug: "appointments"    
+  },
+  {
+    label: <div className="pl-[14px] pr-[14px] pt-[9px] pb-[9px]" style={{backgroundColor: "#9DD0ED", borderRadius: "5px", fontSize: "12px"}}>Court Related</div>,
+    key: '7',
+    value: "Court Related",
+    slug: "court-related"
+  },
+];
+
+const BookColor = ({item}) => {
+  
+  let color;
+  if(item === "Offline Meeting") {
+    color = "#FDCFA4";
+  } else if(item === "Virtual Meeting") {
+    color = "#F9E9C3";
+  } else if(item === "ASAP") {
+    color = "#AFEBDB";
+  } else if(item === "Client Related") {
+    color = "#CBF1C2";
+  } else if(item === "Self Task") {
+    color = "#CFCEF9";
+  } else if(item === "Appointments") {
+    color = "#F9E0FD";
+  } else if(item === "Court Related") {
+    color = "#9DD0ED";
+  } else if(item === "Important ASAP") {
+    color = "#E5F1FF";
+  }
+
+  return(
+    <div
+      className="ml-[8px] px-[12px] py-[8px]"
+      style={{
+        color: "#4F4F4F",
+        fontSize: "12px",
+        backgroundColor: color,
+        borderRadius: "5px"
+      }}
+    >
+      {item}
+    </div>
+  );
+};
 
 const AccordionItem = ({data}) => {
-  // const [isActive, setIsActive] = React.useState(false);
+  // const [openTags, setOpenTags] = React.useState(false);
   const [isActive, setIsActive] = React.useState(data.active);
   const [dateChoosen, setDateChoosen] = React.useState(newDate);
+  const [tags, setTags] = React.useState(data.tags);
 
   const onChangeDate = (date, dateString) => {
     setDateChoosen(dateString);
@@ -42,6 +132,29 @@ const AccordionItem = ({data}) => {
   } else {
     status = "";
   }
+
+  function removeArray(arr) {
+    var what, a = arguments, L = a.length, ax;
+    while (L > 1 && arr.length) {
+      what = a[--L];
+      while ((ax= arr.indexOf(what)) !== -1) {
+        arr.splice(ax, 1);
+      }
+    }
+    return arr;
+  }
+
+  const selectTags = (item) => {
+    let tempTags = tags;
+
+    if(tempTags.includes(item)) {
+      let newArr = removeArray(tempTags, item);
+      setTags([...newArr]);
+    } else {
+      tempTags.push(item);
+      setTags([...tempTags]);
+    }
+  };
 
   return(
     <div 
@@ -139,12 +252,167 @@ const AccordionItem = ({data}) => {
               <div
                 className="ml-[8px]"
                 style={{
-                  color: "#4F4F4F"
+                  color: "#4F4F4F",
+                  fontSize: "12px"
                 }}
               >
                 {data.description !== "" ? (<>{data.description}</>) : (<>{"No Description"}</>)}
               </div>
             </div>
+            {tags.length > 0 ? (<>
+              <div className="flex mt-[16px]">
+                <div>
+                  <Bookmark 
+                    fill={data.new === true ? "#4F4F4F" : "#2F80ED"}
+                  />
+                </div>
+
+                {data.new === true ? (<>
+                  <div
+                    className="ml-[8px] flex items-center"
+                    style={{
+                      color: "#4F4F4F",
+                      fontSize: "12px"
+                    }}
+                  >
+                    {tags.map((item, index) => {
+                      return(
+                        <React.Fragment
+                          key={`${index}`}
+                        >
+                          <BookColor 
+                            item={item}
+                          />
+                        </React.Fragment>
+                      );
+                    })}                    
+                    <Dropdown
+                      className="yogie-tags ml-[8px]"
+                      menu={{
+                        items,
+                        selectable: true,
+                      }}
+                      trigger={['click']}
+                      dropdownRender={() => (<>
+                        <div>
+                          <div className="">
+                            <ul className="yogie-tags ant-dropdown-menu">
+                              {items.map((item, index) => {
+                                return(
+                                  <React.Fragment
+                                    key={index}
+                                  >
+                                    <li className=" ant-dropdown-menu-item-only-child cursor-pointer" onClick={() => selectTags(item.value)}>
+                                      <span 
+                                        className="ant-dropdown-menu-title-content"
+                                        style={{
+                                          color: item.color
+                                        }}
+                                      >
+                                        {item.label}
+                                      </span>
+                                    </li>
+                                  </React.Fragment>
+                                );
+                              })}
+                
+                            </ul>
+                          </div>
+                        </div>
+                      </>)}                    
+                    >
+                      <a onClick={(e) => e.preventDefault()} className="cursor-pointer">
+                        <Space
+                          style={{
+                            color: "#4F4F4F",
+                            fontSize: "12px"
+                          }}
+                        >
+                          Choose Tags
+                        </Space>
+                      </a>
+                    </Dropdown>
+                  </div>                
+                </>) : (<>
+                  {tags.map((item, index) => {
+                    return(
+                      <React.Fragment
+                        key={`${index}`}
+                      >
+                        <BookColor 
+                          item={item}
+                        />
+                      </React.Fragment>
+                    );
+                  })}
+                </>)}
+
+              </div>
+            </>) : (<>
+              <div className="flex mt-[16px]">
+                <div>
+                  <Bookmark 
+                    fill={data.new === true ? "#4F4F4F" : "#2F80ED"}
+                  />
+                </div>
+                {data.new === true ? (<>
+                  <div
+                    className="ml-[8px]"
+                    style={{
+                      color: "#4F4F4F",
+                      fontSize: "12px"
+                    }}
+                  >
+                    <Dropdown
+                      className="yogie-tags"
+                      menu={{
+                        items,
+                        selectable: true,
+                      }}
+                      trigger={['click']}
+                      dropdownRender={() => (<>
+                        <div>
+                          <div className="">
+                            <ul className="yogie-tags ant-dropdown-menu">
+                              {items.map((item, index) => {
+                                return(
+                                  <React.Fragment
+                                    key={index}
+                                  >
+                                    <li className=" ant-dropdown-menu-item-only-child cursor-pointer" onClick={() => selectTags(item.value)}>
+                                      <span 
+                                        className="ant-dropdown-menu-title-content"
+                                        style={{
+                                          color: item.color
+                                        }}
+                                      >
+                                        {item.label}
+                                      </span>
+                                    </li>
+                                  </React.Fragment>
+                                );
+                              })}
+                
+                            </ul>
+                          </div>
+                        </div>
+                      </>)}                    
+                    >
+                      <a onClick={(e) => e.preventDefault()} className="cursor-pointer">
+                        <Space
+                          style={{
+                            color: "#4F4F4F",
+                            fontSize: "12px"
+                          }}
+                        >
+                          Choose Tags
+                        </Space>
+                      </a>
+                    </Dropdown>
+                  </div>
+                </>) : null}
+              </div>            
+            </>)}
           </div>
         </div>
       </>) : null}

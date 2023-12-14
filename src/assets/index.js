@@ -13,8 +13,10 @@ import ArrowUpExpand from "./icon/arrow-up-expand";
 import ArrowDownExpand from "./icon/arrow-down-expand";
 import Clock from "./icon/clock";
 import Pencil from "./icon/pencil";
+import Bookmark from "./icon/bookmark";
 
 export { 
+  Bookmark,
   Pencil, 
   Clock, 
   ArrowDownExpand, 
