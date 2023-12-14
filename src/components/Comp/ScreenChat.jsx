@@ -143,7 +143,7 @@ const ScreenChat = () => {
           <>
             <header className="w-full text-center border-b border-grey pl-[29px] pr-[39px] pt-[20px] pb-[20px]">
               <div className="input-search ml-2 h-[58px]">
-                <div className="p-1 flex rounded duration-300 cursor-pointer text-white chat-input-search">
+                <div className="p-1 flex rounded duration-300 cursor-pointer text-white chat-input-search no-reply">
                   <input
                     type="text"
                     placeholder="Search"

@@ -16,42 +16,55 @@ const ChatHeaderItem = ({item, onClickChat}) => {
     >
       <div className="flex">
         <div className="image-item-chat">
-          <div
-            className="flex relative"
-            style={{ width: "50px" }}
-          >
+          {item.from === "bot" ? (<>
             <div
-              style={{
-                height: "34px",
-                width: "34px",
-                backgroundColor: "#E0E0E0",
-                borderRadius: "25px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
+              className="flex relative"
+              style={{ width: "50px" }}
             >
-              <IconUser
-                style={{
-                  color: "4F4F4F",
-                }}
+              <img
+                className="absolute right-0"
+                src={require("../../assets/img/BlueF.png")}
+                alt=""
               />
             </div>
+          </>) : (<>
             <div
-              className="absolute right-0"
-              style={{
-                height: "34px",
-                width: "34px",
-                backgroundColor: "#2F80ED",
-                borderRadius: "25px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
+              className="flex relative"
+              style={{ width: "50px" }}
             >
-              <IconUser style={{ color: "white" }} />
+              <div
+                style={{
+                  height: "34px",
+                  width: "34px",
+                  backgroundColor: "#E0E0E0",
+                  borderRadius: "25px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <IconUser
+                  style={{
+                    color: "4F4F4F",
+                  }}
+                />
+              </div>
+              <div
+                className="absolute right-0"
+                style={{
+                  height: "34px",
+                  width: "34px",
+                  backgroundColor: "#2F80ED",
+                  borderRadius: "25px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <IconUser style={{ color: "white" }} />
+              </div>
             </div>
-          </div>
+          </>)}
         </div>
         <div
           className="container-info-chat"
